@@ -1,0 +1,13 @@
+<section class="login">
+    <h3>Welcome To WelDup, Expand Your <br> Bussiness More</h3>
+    <form action="POST">
+        <fieldset>
+            <h5>Login to Your Account</h5>
+            <input type="text" id="username" [(ngModel)]="companyName" name="username"  placeholder="Enter Your Company Name" required>
+            <input type="email" id="password" [(ngModel)]="email" name="email" placeholder="Enter Your Email" required>
+            <input type="password" id="pin" [(ngModel)]="password" name="pin" placeholder="Enter Passwords" required>
+            <a href="">Forgot password?</a>
+            <input type="submit" value="Submit" (click)="goToCompanyDashboard() ">
+        </fieldset>
+    </form>
+</section>

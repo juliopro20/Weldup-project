@@ -1,0 +1,29 @@
+<footer>
+    <section class="footer">
+        <div class="box1">
+            <p>To always be informed</p>
+            <h2>Sign up for our <br>newsletter.</h2>
+            <a href="#"><button>Subscribe</button></a>
+        </div>
+        <div class="box2">
+            <div class="box">
+                <h4>Our Partners</h4>
+                <p *ngFor="let name of Partner"><span>></span>{{name}}</p>
+            </div>
+            <div class="box">
+                <h4>Products Available</h4>
+                <p *ngFor="let name of products"><span>></span>{{name}}</p>
+            </div>
+            <div class="box">
+                <h4>Social Links</h4>
+                <div class="icons">
+                    <a href="#"><img [src]="icons[0]" alt=""></a>
+                    <a href="#"><img [src]="icons[1]" alt=""></a>
+                    <a href="#"><img [src]="icons[2]" alt=""></a>
+                    <a href="#"><img [src]="icons[3]" alt=""></a>
+                    <a href="#"><img [src]="icons[4]" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>

@@ -1,0 +1,12 @@
+<section class="login">
+    <h1>Welcome To WelDup</h1>
+    <form>
+        <fieldset>
+            <h5>Login to Your Account</h5>
+            <input type="text" id="username" [(ngModel)]="username" name="username"  placeholder="Enter Your Email" required>
+            <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter Your Password" required>
+            <a href="">Forgot password?</a>
+            <input type="submit" value="Submit"  (click)="goToClientDashboard()">
+        </fieldset>
+    </form>
+</section>

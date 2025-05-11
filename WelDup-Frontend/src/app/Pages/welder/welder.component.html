@@ -1,0 +1,66 @@
+<section class="welder">
+    <div class="video-container">
+        <video autoplay muted loop class="background-video">
+            <source src="video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay">
+            <h1>Hire a welder for your repairs or <br> special orders</h1>
+            <p>WelDup offers high skilled welders globally which help in closed range repairs, <br> product orderings which reduces a huge amount of time and effort waisting <br> in finding a welder. </p>
+        </div>
+    </div>
+    
+    <div class="welder-content">
+        
+        <h2>Some Facilities Offerred <br> By Welder</h2>
+        
+        <div class="welder-box"> 
+            
+            @for (item of itemstext; track $index) {
+                <div class="welder-offers">
+                    <h4>{{item.header}}</h4>
+                    <p>{{item.text}}</p>
+                </div>
+            }
+        </div>
+
+        <h2>Our Available Welders At <br> Your Services</h2>
+        <div class="welder-cards">
+            @for (item of welders; track $index) {
+                <div>
+                    <img [src]="item.image" alt="">
+                    <div class="welder-text">
+                        <p>Name(Company): <span>{{item.companyName}}</span></p>
+                        <p>Location: <span>{{item.location}}</span></p>
+                        <p>Contact: <span>{{item.contact}}</span></p>
+                        <button type="submit" (click)="openForm()">Contact Us</button>
+                    </div>
+                </div>
+            }
+        </div>
+</div>
+
+<!-- codes for popup forms -->
+
+<div class="popup" *ngIf="isFormOpen">
+    <div class="popup-content">
+        <span class="close-btn" (click)="closeForm()">X</span>
+        <h2>Submit Your Information</h2>
+        <form #infoForm="ngForm" (ngSubmit)="onSubmit(infoForm)">
+            <input type="text" id="name" name="name" placeholder="Enter Your Name" ngModel required>
+            <input type="email" id="email" name="email" placeholder="Enter Your Email" ngModel required>
+            <input type="tel" id="number" name="number" placeholder="Enter Your Phone Number" ngModel required>
+            <input type="text" id="location" name="location" placeholder="Enter Your Location" ngModel required>
+            <button type="submit">Submit</button>
+        </form>
+        
+    </div>
+</div>
+</section>
+
+
+<app-footer></app-footer>
+
+
+
+

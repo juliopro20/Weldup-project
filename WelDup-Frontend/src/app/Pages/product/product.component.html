@@ -1,0 +1,168 @@
+<section class="product">
+    <aside class="sidebar">
+        <img src="weldup.png" alt="logo">
+
+        <h6>WelDup Products</h6>
+
+        <a (click)="goToHome()">Home</a> <br>
+        <div class="dropdown">
+            <button class="dropbtn">Other Pages</button>
+            <div class="dropdown-content">
+                <a (click)="goToServices()">Services</a>
+                <a (click)="goToAbout()">About</a>
+                <a (click)="goToWelder()">Find A Welder</a>
+            </div>
+        </div>
+
+        <h4>Categories</h4>
+        <div class="categories">
+            <details>
+                <summary>Buildings</summary>
+                <p>Doors</p>
+                <p>Windows</p>
+                <p>Gates</p>
+            </details>
+            <details>
+                <summary>Farm Tools</summary>
+                <p>Cutlass</p>
+                <p>Hoes</p>
+                <details>
+                    <summary>Diggers</summary>
+                    <p>Plantoi</p>
+                    <p>Baramie</p>
+                </details>
+            </details>
+        </div>
+    </aside>
+
+    <main>
+        <div class="product-header">
+            <div class="heading">
+                <div class="dropdown header-menu">
+                    <button class="dropbtn"><mat-icon>menu</mat-icon></button>
+                    <div class="dropdown-content">
+                        <a (click)="goToHome()">Home</a>
+                        <a (click)="goToServices()">Services</a>
+                        <a (click)="goToAbout()">About</a>
+                        <a (click)="goToWelder()">Find A Welder</a>
+                    </div>
+                </div>
+                <h4>Available Products</h4>
+            </div>
+            <div class="search">
+                <input type="search" placeholder="Search">
+                <mat-icon>search</mat-icon>
+            </div>
+            
+            <div class="notification">
+                <mat-icon class="shop-icon" (click)="cartTable()">add_shopping_cart</mat-icon>
+                <p><sub>{{notification()}}</sub></p>
+            </div>
+        </div>
+
+
+       
+        <div class="product-container">
+            <div class="product-cards">
+                <div class="card" *ngFor="let product of products">
+                    <img [src]="product.image" alt="">
+                    <div class="rating">
+                        <span *ngFor="let star of stars; let i = index" 
+                              (click)="setRating(i + 1)"
+                              [class.filled]="star">
+                          <i class="material-icons">
+                            {{ star ? 'star' : 'star_border' }}
+                          </i>
+                        </span>
+                    </div>
+
+                    <div class="product-text">
+                        <p>Product Name: <span>{{ product.productName }}</span></p>
+                        <p>Price: <span>{{ product.price }} frs</span></p>
+                        <p>Company Name: <span>{{product.companyName}}</span></p>
+                        <p>Location: <span>{{product.location}}</span></p>
+                        <button (click)="addToCart(product)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-table" >
+                <h3>Shopping Cart</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name of Product</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of cartItems">
+                            <td>{{ item.productName }}</td>
+                            <td>{{ item.price }}frs</td>
+                            <td>
+                                <button (click)="removeFromCart(item)"><mat-icon>delete</mat-icon></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Total: {{ totalPrice() }}frs</h4>
+                                        
+                <button type="submit" (click)="openForm()">Buy Here</button>
+            </div>
+
+            <div class="cart-table-responsive" *ngIf="isCartOpen">
+                <h3>Shopping Cart</h3>
+                <span class="close-btn" (click)="closeCart()">X</span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name of Product</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of cartItems">
+                            <td>{{ item.productName }}</td>
+                            <td>{{ item.price }}frs</td>
+                            <td>
+                                <button (click)="removeFromCart(item)"><mat-icon>delete</mat-icon></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Total: {{ totalPrice() }}frs</h4>
+                                        
+                <button type="submit" (click)="openForm()">Buy Here</button>
+            </div>
+        </div>
+
+        
+
+
+        <div class="popup" *ngIf="isFormOpen">
+            <div class="popup-content">
+                <span class="close-btn" (click)="closeForm()">X</span>
+                <h2>Choose method of payment</h2>
+                <form #infoForm="ngForm" (ngSubmit)="onSubmit(infoForm)">
+                    <div class="popup-image">
+                        <img src="mtn_logo.jpg" alt="" (click) = "changeTab('momo')">
+                        <img src="orange.jpg" alt="" (click) = "changeTab('orange')">
+                    </div>
+                    <h4>Click to pay: {{ totalPrice() }}frs</h4>
+
+                    @if (currentComponent == 'momo') {
+                        <input type="tel" id="tel" name="tel" placeholder="Enter MOMO account number" ngModel required>
+                        <button type="submit">Pay</button>
+                    }
+                    @if (currentComponent == 'orange') {
+                        <input type="tel" id="tel" name="tel" placeholder="Enter Orange account number" ngModel required>
+                        <button type="submit">Pay</button>
+                    }
+                </form>
+                
+            </div>
+        </div>
+    </main>
+</section>

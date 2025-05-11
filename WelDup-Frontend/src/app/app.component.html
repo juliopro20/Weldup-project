@@ -1,0 +1,76 @@
+<header>
+   <section class="header" *ngIf="!isPresent()" >  
+    <img src="weldup.png" alt="logo">
+        <nav>
+            <ul>
+                <li><a (click)="toTop()" routerLink="/" srouterLinkActive="active" ariaCurrentWhenActive="page">Home</a></li>
+                <li><a (click)="toTop()" routerLink="/service" routerLinkActive="active" ariaCurrentWhenActive="page">Service</a></li>
+                <li><a (click)="toTop()" routerLink="/product" routerLinkActive="active" ariaCurrentWhenActive="page">Product</a></li>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">More</button>
+                        <div class="dropdown-content">
+                            <a (click)="toTop()" routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">About
+                                Us</a>
+                            <!-- <a routerLink="/blog" routerLinkActive="active" ariaCurrentWhenActive="page">Blog</a> -->
+                            <a (click)="toTop()" routerLink="/faq" routerLinkActive="active" ariaCurrentWhenActive="page">FAQ</a>
+                            <a (click)="toTop()" routerLink="/contact" routerLinkActive="active" ariaCurrentWhenActive="page">Contact</a>
+                            <a (click)="toTop()" routerLink="/welder" routerLinkActive="active" ariaCurrentWhenActive="page">Find
+                                A welder</a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="buttons">
+                <div class="dropdown">
+                    <button class="dropbtn">Login</button>
+                    <div class="dropdown-content">
+                        <a (click)="toTop()" routerLink="/loginClient" routerLinkActive="active" ariaCurrentWhenActive="page">As Client</a>
+                        <a (click)="toTop()" routerLink="/loginCompany" routerLinkActive="active" ariaCurrentWhenActive="page">As Company</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Register</button>
+                    <div class="dropdown-content">
+                        <a (click)="toTop()" routerLink="/registerClient" routerLinkActive="active" ariaCurrentWhenActive="page">As Client</a>
+                        <a (click)="toTop()" routerLink="/registerCompany" routerLinkActive="active" ariaCurrentWhenActive="page">As Company</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="dropdown-menu">
+            <button class="dropbtn"><mat-icon>menu</mat-icon></button>
+            <div class="dropdown-content-menu">
+                <a (click)="toTop()" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+                <a (click)="toTop()" routerLink="/service" routerLinkActive="active" ariaCurrentWhenActive="page">Service</a>
+                <a (click)="toTop()" routerLink="/product" routerLinkActive="active" ariaCurrentWhenActive="page">Product</a>
+                <a (click)="toTop()" routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">About Us</a>
+                <a (click)="toTop()" routerLink="/blog" routerLinkActive="active" ariaCurrentWhenActive="page">Blog</a>
+                <a (click)="toTop()" routerLink="/faq" routerLinkActive="active" ariaCurrentWhenActive="page">FAQ</a>
+                <a (click)="toTop()" routerLink="/contact" routerLinkActive="active" ariaCurrentWhenActive="page">Contact</a>
+                <a (click)="toTop()" routerLink="/welder" routerLinkActive="active" ariaCurrentWhenActive="page">Find A welder</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Login</button>
+                    <div class="dropdown-content">
+                        <a (click)="toTop()" routerLink="/loginClient" routerLinkActive="active" ariaCurrentWhenActive="page">As Client</a>
+                        <a (click)="toTop()" routerLink="/loginCompany" routerLinkActive="active" ariaCurrentWhenActive="page">As Company</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Register</button>
+                    <div class="dropdown-content">
+                        <a (click)="toTop()" routerLink="/registerClient" routerLinkActive="active" ariaCurrentWhenActive="page">As Client</a>
+                        <a (click)="toTop()" routerLink="/registerCompany" routerLinkActive="active" ariaCurrentWhenActive="page">As Company</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+</header>
+
+<router-outlet></router-outlet>

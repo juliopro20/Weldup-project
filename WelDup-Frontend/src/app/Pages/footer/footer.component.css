@@ -1,0 +1,57 @@
+:root {
+    --Mirage-darkblue: #1C2135;
+    /* for text-colors*/
+    --WaiKawa-GrayBlue: #5A6794;
+    /* for background-colors*/
+    --Wild-Blue-Yonder: #8794C0;
+    /* for background-colors*/
+    --Athens-Gray: #E7E9EE;
+    /* for background-colors*/
+    --Akaroa-light-brown: #D8CDB0;
+    /* whole-backgroung-colors*/
+}
+footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background: #1C2135;
+    color: white;
+    height: fit-content;
+    padding: 30px 0;
+}
+footer .footer {
+    width: 80%;
+    margin: auto;
+    padding: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+}
+footer .footer .box1 button {
+    padding: 10px;
+}
+footer .footer .box2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+} 
+footer .footer .box2 p span {
+    font-size: 18px;
+    margin-right: 5px;
+}
+footer .footer .box2 .box .icons {
+    display: flex;
+    gap: 5px;
+}
+footer .footer .box2 .icons img {
+    width: 40px;
+    height: 40px;
+}
+
+@media screen and (max-width: 700px) {
+    footer .footer, footer .footer .box2 {
+        grid-template-columns: 1fr;
+    }
+}

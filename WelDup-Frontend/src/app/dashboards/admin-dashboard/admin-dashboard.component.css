@@ -1,0 +1,61 @@
+:root {
+    --Mirage-darkblue:  #1C2135; /* for text-colors*/
+    --WaiKawa-GrayBlue:  #5A6794;/* for background-colors*/
+    --Wild-Blue-Yonder: #8794C0;/* for background-colors*/
+    --Athens-Gray: #E7E9EE;	/* for background-colors*/
+    --Akaroa-light-brown: #D8CDB0;/* whole-backgroung-colors*/	  
+}
+
+section.dashboards {
+    margin: 0;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color:  #1C2135;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+.sidebar-nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.sidebar-nav a:hover {
+    background-color: #8794C0;
+}
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.dashboard-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.sales-chart {
+    grid-column: span 2;
+}
+.recent-orders table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.recent-orders th, .recent-orders td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}

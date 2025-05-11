@@ -1,0 +1,87 @@
+<section class="home">
+    <div class="hero">
+        <h1>Welcome To WelDup</h1>
+        <p>Connect with potential clients, Welding Organisation,<br> showcase your expertise, and grow your <br>
+            business with us</p>
+        <div class="hero-buttons">
+            <a (click)="goToAbout()"><button type="button" class="learn">Learn More</button></a>
+            <div class="dropdown">
+                <button class="dropbtn">Register</button>
+                <div class="dropdown-content">
+                    <a (click)="registerAsClient()">As Client</a>
+                    <a (click)="registerAsCompany()">As Company</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="why-us">
+    <h1>Why Use WelDup</h1>
+    <div class="border-bottom"> </div>
+    <div class="why-us-content">
+        <div class="why-us-text">
+            <p>Weldup is your one-stop platform for connecting with welding professionals and discovering
+                top-quality welding products. Whether you're a welding company looking to expand your reach or a
+                customer seeking reliable welding solutions, Weldup offers a convenient and efficient marketplace.
+                Join our thriving community and unlock new opportunities for growth and collaboration.</p>
+            <button type="button">Register</button>
+            <button (click)="goToServices()">Our Services</button>
+            <button (click)="goToProduct()">Our Products</button>
+        </div>
+        <img src="https://img.freepik.com/free-photo/medium-shot-man-working-with-computer_23-2148932662.jpg?ga=GA1.2.474556739.1722353286&semt=ais_hybrid"
+            alt="">
+    </div>
+</section>
+
+
+<section class="review">
+    <h1>Our Testimonials</h1>
+    <div class="border-bottom"> </div>
+    <h4>Read what our customers says</h4>
+    <div class="review-content">
+        <div class="box">
+            <div class="info">
+                <img [src]="reviews[0].imagePerson" alt="">
+                <div>
+                    <h5>{{reviews[0].personName}}</h5>
+                    <h5>{{reviews[0].location}}</h5>
+                </div>
+            </div>
+            <p><span>"</span>{{reviews[0].text}}<span>"</span></p>
+        </div>
+        <div class="box">
+            <div class="info">
+                <img [src]="reviews[1].imagePerson" alt="">
+                <div>
+                    <h5>{{reviews[1].personName}}</h5>
+                    <h5>{{reviews[1].location}}</h5>
+                </div>
+            </div>
+            <p><span>"</span>{{reviews[1].text}}<span>"</span></p>
+        </div>
+
+    </div>
+</section>
+
+<section class="contact">
+    <h1>Contact Us</h1>
+    <div class="contact-content">
+        @for (item of contacts; track $index) {
+        <div class="contact-box">
+            <div class="contact-box-content">
+                <div class="contact-icon">
+                    <mat-icon>{{item.icon}}</mat-icon>
+                </div>
+                <h5>{{item.header}}</h5>
+                <p>{{item.text}}</p>
+                <hr>
+                <h4>{{item.info}}</h4>
+            </div>
+        </div>
+        }
+    </div>
+    <h6>To leran more, <span (click)="goToContact()">Click here</span></h6>
+</section>
+
+<app-footer></app-footer>
