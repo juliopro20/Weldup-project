@@ -26,7 +26,7 @@ export const routes: Routes = [
     { path: 'welder', component: WelderComponent},
     { path: 'loginClient', component: LoginClientComponent},
     { path: 'loginCompany', component: LoginCompanyComponent},
-    { path: 'adminlogin', component: LoginAdminComponent},
+    { path: 'adminLogin', component: LoginAdminComponent},
     { path: 'registerClient', component: RegisterClientComponent},
     { path: 'registerCompany', component: RegisterCompanyComponent},
     { path: 'admin-dashboard', component: AdminDashboardComponent},

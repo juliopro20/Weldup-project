@@ -1,28 +1,43 @@
-import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
+import { Router, RouterModule } from '@angular/router';
+import { ClientService } from '../../User-services/clients/client.service'
 
 @Component({
   selector: 'app-login-client',
   standalone: true,
-  imports: [FormsModule],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './login-client.component.html',
   styleUrl: './login-client.component.css'
 })
-export class LoginClientComponent {
+export class LoginClientComponent implements OnInit {
 
-  username: string ='';
-  password: string = '';
+  fb = inject(FormBuilder) 
+  clientService= inject(ClientService)
+  router = inject(Router);
+  loginClientForm !: FormGroup;
 
-  constructor(private router: Router) {}
-
-  goToClientDashboard() {
-    
-    if(this.username && this.password) {
-      this.router.navigate(['client-dashboard']);
+    ngOnInit(): void {
+       this.loginClientForm = this.fb.group({
+          email: ['', Validators.compose([Validators.required, Validators.email])],
+          password: ['', Validators.required]
+        })
     }
-    else {
-      alert('please fill all the informations')
-    }
+
+    ClientLogin() {
+         this.clientService.loginClientService(this.loginClientForm.value)
+    .subscribe({
+      next: (res) =>{
+        alert('Login Is Success');
+        this.router.navigate(['client-dashboard']);
+        this.loginClientForm.reset();
+      },
+      error: (err)=>{
+        console.log(err)
+      }
+    })
   }
+    
 }

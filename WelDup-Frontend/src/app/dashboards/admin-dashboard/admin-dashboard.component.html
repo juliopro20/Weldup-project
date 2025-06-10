@@ -1,212 +1,205 @@
 <section class="dashboards">
-    <div class="sidebar">
-        <h1>WelDup</h1>
-        <h2>Dashboard</h2>
-        <nav class="sidebar-nav">
-            <a (click)="changeTab('dashboard')">Dashboard</a>
-            <a (click)="changeTab('products')">Products</a>
-            <a (click)="changeTab('orders')">Orders</a>
-            <a (click)="changeTab('clients')">Clients & Companies</a>
-            <a (click)="changeTab('analytics')">Analytics</a>
-        </nav>
+  <div class="sidebar">
+    <h1>WelDup</h1>
+    <h2>Dashboard</h2>
+    <nav class="sidebar-nav">
+      <a (click)="changeTab('dashboard')">Dashboard</a>
+      <a (click)="changeTab('products')">Products</a>
+      <a (click)="changeTab('orders')">Orders</a>
+      <a (click)="changeTab('clients')">Clients & Companies</a>
+      <a (click)="changeTab('analytics')">Analytics</a>
+    </nav>
+  </div>
+
+  <div class="main-content">
+    <h1>Welcome Admin</h1>
+
+    @if (currentPage == 'dashboard') {
+    <div class="dashboard-grid">
+      @for (item of boxes; track $index) {
+      <div class="dashboard-card">
+        <h4>{{ item.header }}</h4>
+        <h4>{{ item.numbers }}</h4>
+      </div>
+      }
+
+      <div class="dashboard-card sales-chart recent-orders">
+        <h3>Registered Client</h3>
+        <div style="height: fit-content; background-color: #ecf0f1">
+          <table>
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>City</th>
+                <th>address</th>
+                <th>Delete User</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (client of clients; track $index) {
+              <tr>
+                <td>{{ client.fullName }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.phoneNumber }}</td>
+                <td>{{ client.city }}</td>
+                <td>{{ client.address }}</td>
+                <td><mat-icon (click)="deleteUserClient(client)" >delete</mat-icon></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 20px">Registered Companies</h3>
+        <div style="height: fit-content; background-color: #ecf0f1">
+          <table>
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Delete User</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (company of companies; track $index) {
+              <tr>
+                <td>{{ company.companyName }}</td>
+                <td>{{ company.email }}</td>
+                <td>{{ company.phoneNumber }}</td>
+                <td>{{ company.city }}</td>
+                <td>{{ company.address }}</td>
+                <td><mat-icon (click)="deleteUserCompany(company)" >delete</mat-icon></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="dashboard-card recent-orders">
+        <h3>Recent Orders</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#1234</td>
+              <td>John Doe</td>
+              <td>129.99frs</td>
+              <td>Shipped</td>
+            </tr>
+            <tr>
+              <td>#1235</td>
+              <td>Jane Smith</td>
+              <td>89.50frs</td>
+              <td>Processing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="main-content">
-        <h1>Welcome Admin</h1>
-
-        @if (currentPage == 'dashboard') {
-        <div class="dashboard-grid">
-            @for (item of items; track $index) {
-            <div class="dashboard-card">
-                <h4>{{item.header}}</h4>
-                <h4>{{item.numbers}}</h4>
-            </div>
-            }
-
-            <div class="dashboard-card sales-chart recent-orders">
-                <h3>Registered Client</h3>
-                <div style="height: fit-content; background-color: #ecf0f1;">
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th>Country</th>
-                                <th>Password</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>James Ekon</td>
-                                <td>james&#64;gmail.com</td>
-                                <td>671770232</td>
-                                <td>Cameroon Buea</td>
-                                <td>***********</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3 style="margin-top: 20px;">Registered Companies</h3>
-                <div style="height: fit-content; background-color: #ecf0f1;">
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th>Country</th>
-                                <th>Password</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>James Welding.Org</td>
-                                <td>james&#64;gmail.com</td>
-                                <td>692849936</td>
-                                <td>Cameroon Buea</td>
-                                <td>***********</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="dashboard-card recent-orders">
-                <h3>Recent Orders</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1234</td>
-                            <td>John Doe</td>
-                            <td>$129.99</td>
-                            <td>Shipped</td>
-                        </tr>
-                        <tr>
-                            <td>#1235</td>
-                            <td>Jane Smith</td>
-                            <td>$89.50</td>
-                            <td>Processing</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
-        }
-
-        @if (currentPage == 'orders') {
-        <div class="dashboard-card recent-orders">
-            <h3>Recent Orders</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Amount</th>
-                        <th>Company Names</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th>status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (item of orders; track $index) {
-                        <tr>
-                            <td>{{item.itemName}}</td>
-                            <td>{{item.amount}}</td>
-                            <td>{{item.companyName}}</td>
-                            <td>{{item.country}}</td>
-                            <td>{{item.city}}</td>
-                            <td>{{item.status}}</td>
-                        </tr>
-                    }
-                    
-                </tbody>
-            </table>
-        </div>
-        }
-
-        @if (currentPage == 'clients') {
-
-        <div class="dashboard-card recent-orders">
-            <h3>Registered Client</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th>Password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (item of registerClient; track $index) {
-                        <tr>
-                            <td>{{item.fullName}}</td>
-                            <td>{{item.email}}</td>
-                            <td>{{item.phoneNumber}}</td>
-                            <td>{{item.country}}</td>
-                            <td>{{item.city}}</td>
-                            <td>{{item.passwords}}</td>  
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="dashboard-card recent-orders" style="margin-top: 25px;">
-            <h3>Registered Company</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th>Password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (item of registerCompany; track $index) {
-                        <tr>
-                            <td>{{item.fullName}}</td>
-                            <td>{{item.email}}</td>
-                            <td>{{item.phoneNumber}}</td>
-                            <td>{{item.country}}</td>
-                            <td>{{item.city}}</td>
-                            <td>{{item.passwords}}</td> 
-                            
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        }
-        @if (currentPage == 'analytics') {
-
-        <h1>graphs </h1>
-        }
-
-        @if (currentPage == 'products') {
-            <h1>View Products and Uploads </h1>
-        }
-
-
+    } @if (currentPage == 'orders') {
+    <div class="dashboard-card recent-orders">
+      <h3>Recent Orders</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Amount</th>
+            <th>Company Names</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of orders; track $index) {
+          <tr>
+            <td>{{ item.itemName }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.companyName }}</td>
+            <td>{{ item.country }}</td>
+            <td>{{ item.city }}</td>
+            <td>{{ item.status }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
     </div>
+    } @if (currentPage == 'clients') {
+
+    <div class="dashboard-card recent-orders">
+      <h3>Registered Client</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Delete User</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (client of clients; track $index) {
+          <tr>
+            <td>{{ client.fullName }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.phoneNumber }}</td>
+            <td>{{ client.city }}</td>
+            <td>{{ client.address }}</td>
+            <td><mat-icon (click)="deleteUserClient(client)" >delete</mat-icon></td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="dashboard-card recent-orders" style="margin-top: 25px">
+      <h3>Registered Company</h3>
+      <table>
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Delete User</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (company of companies; track $index) {
+              <tr>
+                <td>{{ company.companyName }}</td>
+                <td>{{ company.email }}</td>
+                <td>{{ company.phoneNumber }}</td>
+                <td>{{ company.city }}</td>
+                <td>{{ company.address }}</td>
+                <td><mat-icon (click)="deleteUserCompany(company)" >delete</mat-icon></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+    </div>
+    } @if (currentPage == 'analytics') {
+
+    <h1>graphs</h1>
+    } @if (currentPage == 'products') {
+    <h1>View Products and Uploads</h1>
+    }
+  </div>
 </section>

@@ -1,39 +1,107 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { Client } from '../../models/client.model'
+import { Company } from '../../models/company.model'
+import { ClientService } from '../../User-services/clients/client.service'
+import { CompaniesService } from '../../User-services/companies/companies.service'
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
-export class AdminDashboardComponent {
-
+export class AdminDashboardComponent implements OnInit {
   
-  constructor(private router: Router) {}
+  clients: Client[] = [];
+  companies: Company[] =[]
 
-  goToProducts() {
-    this.router.navigate(['/product']).then(()=>
-      window.scrollBy(0,0)
+  private clientService = inject(ClientService)
+  private companyService = inject(CompaniesService)
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  // Helper to load both clients and companies
+  loadData() {
+    this.ClientData();
+    this.CompanyData();
+  }
+
+  ClientData() { 
+    this.clientService.getAllClientService().subscribe(
+      (res: any) => {
+        this.clients = res.data;
+        this.updateBoxes();
+      },
+      (error: any) => {
+        console.log('error: ', error)
+      }
     )
   }
 
-  // dashboards toggling
+  CompanyData() { 
+    this.companyService.getAllCompanyService().subscribe(
+      (res: any) => {
+        this.companies = res.data;
+        this.updateBoxes();
+      },
+      (error: any) => {
+        console.log('error: ', error)
+      }
+    )
+  }
 
+  boxes = [
+    { header: 'Number of Clients', numbers: 0 },
+    { header: 'Company Numbers', numbers: 0 },
+    { header: 'Total Amount', numbers: 450000 },
+  ];
+  // Update dashboard boxes with current counts
+  updateBoxes() {
+    this.boxes = [
+      { header: 'Number of Clients', numbers: this.clients.length },
+      { header: 'Company Numbers', numbers: this.companies.length },
+      { header: 'Total Amount', numbers: 450000 }, // Update as needed
+    ];
+  }
+
+  // Deleting a user from the database
+  deleteUserClient(client: Client) {
+    if (window.confirm("Do you want to delete the Client " + client.fullName + " ?")) {
+      this.clientService.deleteClient(client._id).subscribe(
+        data => {
+          this.ClientData();
+        },
+        error => {
+          console.log('error: ', error)
+        }
+      )
+    }
+  }
+
+  deleteUserCompany(company: Company) {
+    if (window.confirm("Do you want to delete the Company " + company.companyName + " ?")) {
+      this.companyService.deleteCompany(company._id).subscribe(
+        data => {
+          this.CompanyData();
+        },
+        error => {
+          console.log('error: ', error)
+        }
+      )
+    }
+  }
+
+  // dashboards toggling
   currentPage: string = 'dashboard'
   changeTab(tabName: string) {
     this.currentPage = tabName;
   }
 
-
-  //tables arrays of objects
-
-  items =[
-    {header: 'Number of Clients', numbers: 450},
-    {header: 'Company Numbers', numbers: 4},
-    {header: 'Total Amount', numbers: 450000},
-  ]
+ 
 
 
   orders = [
@@ -70,35 +138,7 @@ export class AdminDashboardComponent {
   ]
   
 
-  registerClient = [
-    {
-      fullName: 'Nkambi Julius',
-      email: 'nkambi@gmail.com',
-      phoneNumber: '671770232',
-      country: 'Cameroon',
-      city: 'buea',
-      passwords: '**********',
-
-    },
-    {
-      fullName: 'Bill Kerry',
-      email: 'billkerry@gmail.com',
-      phoneNumber: '692345722',
-      country: 'Cameroon',
-      city: 'Dschang',
-      passwords: '****',
-
-    },
-    {
-      fullName: 'Ndeng Carlson',
-      email: 'carlson20@gmail.com',
-      phoneNumber: '674903445',
-      country: 'cameroon',
-      city: 'Douala',
-      passwords: '*********',
-
-    }
-  ]
+  
 
   registerCompany = [
     {

@@ -3,7 +3,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { DataService } from '../../data-service.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({

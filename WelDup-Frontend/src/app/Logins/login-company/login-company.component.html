@@ -1,13 +1,23 @@
 <section class="login">
     <h3>Welcome To WelDup, Expand Your <br> Bussiness More</h3>
-    <form action="POST">
+    <form action="POST" [formGroup]="loginCompanyForm">
         <fieldset>
             <h5>Login to Your Account</h5>
-            <input type="text" id="username" [(ngModel)]="companyName" name="username"  placeholder="Enter Your Company Name" required>
-            <input type="email" id="password" [(ngModel)]="email" name="email" placeholder="Enter Your Email" required>
-            <input type="password" id="pin" [(ngModel)]="password" name="pin" placeholder="Enter Passwords" required>
+            <div>
+                <input formControlName="companyName"  type="text" placeholder="Company Name" required />
+                <span *ngIf="loginCompanyForm.hasError('required', 'companyName') && loginCompanyForm.controls['companyName'].dirty">*Company Name is required</span>
+            </div>
+            <div>
+                <input formControlName="email" type="email" placeholder="Email" required />
+                <span *ngIf="loginCompanyForm.hasError('required', 'email') && loginCompanyForm.controls['email'].dirty">*Email is required</span>
+                <span *ngIf="loginCompanyForm.hasError('email', 'email')" >*Email is Invalid</span>
+            </div>
+            <div>
+                <input formControlName="password" type="password" placeholder="Password" required />
+                <span *ngIf="loginCompanyForm.hasError('required', 'password') && loginCompanyForm.controls['password'].dirty">*Password is required</span>
+            </div>
             <a href="">Forgot password?</a>
-            <input type="submit" value="Submit" (click)="goToCompanyDashboard() ">
+            <button [disabled]="loginCompanyForm.invalid" [class.disabled]="loginCompanyForm.invalid" type="submit"  (click)="ClientLogin()">Submit</button>
         </fieldset>
     </form>
 </section>

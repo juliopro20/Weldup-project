@@ -1,18 +1,96 @@
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { Product } from '../../models/product.model';
+import { ProductsService } from '../../User-services/products/products.service'
 
 @Component({
   selector: 'app-company-dashboard',
   standalone: true,
-  imports: [FormsModule, MatIconModule, CommonModule],
+  imports: [FormsModule, MatIconModule, CommonModule, ReactiveFormsModule],
   templateUrl: './company-dashboard.component.html',
   styleUrl: './company-dashboard.component.css'
 })
-export class CompanyDashboardComponent {
-  constructor(private router: Router) {}
+export class CompanyDashboardComponent implements OnInit {
+
+  private router = inject(Router)
+  fb = inject(FormBuilder)
+  createProductForm !: FormGroup;
+  products: Product[] = []
+  productCount: number = 0; // Track number of products
+
+  //importing the product service
+  private productService = inject(ProductsService)
+
+  ngOnInit(): void{
+    this.createProductForm = this.fb.group({
+      itemName: ['', Validators.required],
+      amount: ['', Validators.required],
+      companyName: ['', Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
+      productImage: ['', Validators.required]
+    })
+
+    this.productData()
+  }
+
+  // Fetch products and output to frontend and CLI
+  productData() {
+    this.productService.getAllProductService().subscribe(
+      (res: any) => {
+        this.products = Array.isArray(res) ? res : (res.data || []);
+        this.productCount = this.products.length; // Update product count
+        console.log('Fetched products:', this.products);
+      },
+      (error: any) => {
+        console.log('error: ', error);
+        this.products = [];
+        this.productCount = 0; // Reset product count on error
+      }
+    );
+  }
+
+  createProducts(){
+    this.productService.createProductService(this.createProductForm.value)
+      .subscribe({
+        next: (res)=>{
+          alert("Product Cart Created");
+          this.createProductForm.reset();
+          this.productData(); // Refresh products and count after adding
+        },
+        error: (err)=>{
+          console.log(err)
+        }
+      })
+  }
+
+  //to delete a product
+  deleteProduct(product: Product) {
+    if (window.confirm("Do you want to delete this Product " + product.itemName + " ?")) {
+      this.productService.deleteProduct(product._id).subscribe(
+        data => {
+          this.productData(); // Refresh products and count after deletion
+        },
+        error => {
+          console.log('error: ', error)
+        }
+      )
+    }
+  }
+
+  items =[
+    {header: 'Number of Products', numbers: 0}, // Will update in ngOnInit
+    {header: 'Products bought', numbers: 8},
+  ]
+
+  // Update items[0].numbers whenever productCount changes
+  ngDoCheck() {
+    this.items[0].numbers = this.productCount;
+  }
+
 
   goToProducts() {
     this.router.navigate(['/product']).then(()=>
@@ -20,55 +98,31 @@ export class CompanyDashboardComponent {
     )
   }
 
-  // dashboards toggling
-
+  
+// dashboards toggling
+  //for the dashboard page
   currentPage: string = 'dashboard'
   changeTab(tabName: string) {
     this.currentPage = tabName;
   }
 
+  //for the profile page
+  profilePage: string = 'profileview'
 
-  //tables arrays of objects
+  profileChangeTab(profiletab: string) {
+    this.profilePage = profiletab 
 
-  items =[
-    {header: 'Number of items bought', numbers: 8},
-    {header: 'Total Amount paid', numbers: 450000},
-  ]
-
-
-  orders = [
-    {
-      itemName: 'Axes',
-      amount: '5000frs',
-      companyName: 'Elite Welding.Org',
-      country: 'Cameroon',
-      city: 'Buea',
-      date: '20/02/2023',
-      status: 'Shipped',
-
-    },
-    {
-      itemName: 'diggers',
-      amount: '8000frs',
-      companyName: 'Elite Welding.Org',
-      country: 'Cameroon',
-      city: 'Buea',
-      date: '20/02/2023',
-      status: 'loading',
-
-    },
-    {
-      itemName: 'Windows',
-      amount: '70,000frs',
-      companyName: 'dschang soudure SA',
-      country: 'Cameroon',
-      city: 'dschang',
-      date: '20/02/2023',
-      status: 'shipped',
-
-    }
-  ]
+  }
+  //for the product page
   
+  productPage: string = 'productList'
+
+  productChangeTab(producttab: string) {
+    this.productPage = producttab 
+
+  }
+
+  //tables arrays of objects  
 
   //codes for the profile page.
 
@@ -79,11 +133,5 @@ export class CompanyDashboardComponent {
   country: string = 'Cameroon';
   city: string = 'Yaounde'
 
-  profilePage: string = 'profileview'
-
-  profileChangeTab(profiletab: string) {
-    this.profilePage = profiletab 
-
-  }
 
 }

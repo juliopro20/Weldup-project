@@ -1,12 +1,19 @@
 <section class="login">
     <h1>Welcome To WelDup</h1>
-    <form>
+    <form [formGroup] = "loginClientForm">
         <fieldset>
             <h5>Login to Your Account</h5>
-            <input type="text" id="username" [(ngModel)]="username" name="username"  placeholder="Enter Your Email" required>
-            <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter Your Password" required>
+                <div>
+                    <input formControlName="email" type="email" placeholder="Email" required />
+                    <span *ngIf="loginClientForm.hasError('required', 'email') && loginClientForm.controls['email'].dirty">*Email is required</span>
+                    <span *ngIf="loginClientForm.hasError('email', 'email')" >*Email is Invalid</span>
+                </div>
+                <div>
+                    <input formControlName="password" type="password" placeholder="Password" required />
+                    <span *ngIf="loginClientForm.hasError('required', 'password') && loginClientForm.controls['password'].dirty">*Password is required</span>
+                </div>
             <a href="">Forgot password?</a>
-            <input type="submit" value="Submit"  (click)="goToClientDashboard()">
+            <button [disabled]="loginClientForm.invalid" [class.disabled]="loginClientForm.invalid" type="submit"  (click)="ClientLogin()">Submit</button>
         </fieldset>
     </form>
 </section>

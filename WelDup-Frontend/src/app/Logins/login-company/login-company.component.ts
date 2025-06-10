@@ -1,28 +1,43 @@
-import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
+import { Router, RouterModule } from '@angular/router';
+import { CompaniesService } from '../../User-services/companies/companies.service'
 
 @Component({
   selector: 'app-login-company',
   standalone: true,
-  imports: [FormsModule],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './login-company.component.html',
   styleUrl: './login-company.component.css'
 })
 export class LoginCompanyComponent {
-  companyName: string = '';
-  password: string = '';
-  email: string = '';
-
+    fb = inject(FormBuilder) 
+    companyService= inject(CompaniesService)
+    router = inject(Router);
+    loginCompanyForm !: FormGroup;
   
-  constructor(private router: Router) { };
+      ngOnInit(): void {
+         this.loginCompanyForm = this.fb.group({
+            companyName: ['', Validators.required],
+            email: ['', Validators.compose([Validators.required, Validators.email])],
+            password: ['', Validators.required]
+          })
+      }
+  
+      ClientLogin() {
+           this.companyService.loginCompanyService(this.loginCompanyForm.value)
+      .subscribe({
+        next: (res) =>{
+          alert('Login Is Success');
+          this.router.navigate(['client-dashboard']);
+          this.loginCompanyForm.reset();
+        },
+        error: (err)=>{
+          console.log(err)
+        }
+      })
+    }
 
-  goToCompanyDashboard() {
-    if(this.companyName && this.password && this.email) {
-      this.router.navigate(['company-dashboard'])
-    }
-    else {
-      alert('please fill in all the informations')
-    }
-  }
 }

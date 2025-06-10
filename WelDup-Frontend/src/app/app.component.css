@@ -153,3 +153,9 @@ header nav .buttons button:hover, .dropdown-menu .buttons button:hover {
     display: block;
   }
 }
+
+
+.disable {
+    opacity: 0.6;
+    cursor: none;
+}

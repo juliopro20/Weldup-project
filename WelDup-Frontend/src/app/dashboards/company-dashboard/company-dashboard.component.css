@@ -50,11 +50,11 @@ section.dashboards {
 .sales-chart {
     grid-column: span 2;
 }
-.recent-orders table {
+ table {
     width: 100%;
     border-collapse: collapse;
 }
-.recent-orders th, .recent-orders td {
+ th,  td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -138,4 +138,28 @@ button.profileview:hover, button.profileform:hover {
     border-radius: 10px;
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+
+/* form codes */
+form {
+    margin-left: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px;
+}
+
+form input, form button {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+form button {
+    color: white;
+    padding: 10px;
+    background-color: #1C2135;
+    border: none;
 }

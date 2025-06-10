@@ -66,15 +66,6 @@
             <div class="product-cards">
                 <div class="card" *ngFor="let product of products">
                     <img [src]="product.image" alt="">
-                    <div class="rating">
-                        <span *ngFor="let star of stars; let i = index" 
-                              (click)="setRating(i + 1)"
-                              [class.filled]="star">
-                          <i class="material-icons">
-                            {{ star ? 'star' : 'star_border' }}
-                          </i>
-                        </span>
-                    </div>
 
                     <div class="product-text">
                         <p>Product Name: <span>{{ product.productName }}</span></p>
