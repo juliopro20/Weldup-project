@@ -30,13 +30,15 @@ section.login h3 {
     font-size: 18px;
 }
 
-input[type="submit"] {
+button {
     color: white;
     background-color: #1C2135;
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
     height: 50px;
+    width: 100%;
+    font-size: 20px;
 } 
 .login form fieldset a {
     color: rgb(34, 34, 245);

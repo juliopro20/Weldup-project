@@ -122,6 +122,13 @@ export class CompanyDashboardComponent implements OnInit {
 
   }
 
+  confirm() {
+    alert("Product Created Successfully");
+    this.createProductForm.reset();
+    this.productChangeTab('productList');
+  }
+
+
   //tables arrays of objects  
 
   //codes for the profile page.
