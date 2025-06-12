@@ -17,3 +17,4 @@ router.get('/getAll-products', getAllProducts)
 router.delete('/delete/:id', deleteProduct)
 
 export default router;
+

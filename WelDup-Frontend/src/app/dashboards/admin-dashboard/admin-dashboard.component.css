@@ -50,12 +50,14 @@ section.dashboards {
 .sales-chart {
     grid-column: span 2;
 }
-.recent-orders table {
+table {
     width: 100%;
     border-collapse: collapse;
+    background-color: white;
 }
-.recent-orders th, .recent-orders td {
+ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-size: 13px;
 }

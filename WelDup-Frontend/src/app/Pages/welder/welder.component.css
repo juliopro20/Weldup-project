@@ -160,9 +160,10 @@ input {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%;
 }
 
-button[type="submit"] {
+button {
     background-color: #1C2135;
     color: white;
     border: none;

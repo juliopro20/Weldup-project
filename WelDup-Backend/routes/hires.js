@@ -1,8 +1,6 @@
 import express from 'express'
 import {createHire,  getAllHires, deleteHire} from '../controllers/hires.controller.js'
 
-// import {verifyAdmin} from '../utils/verifyToken.js'
-
 const router = express.Router()
 
 //create a new Hire
