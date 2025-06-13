@@ -8,6 +8,7 @@
       <a (click)="changeTab('orders')">Orders</a>
       <a (click)="changeTab('clients')">Clients & Companies</a>
       <a (click)="changeTab('hires')">Hires</a>
+      <a href="#" style="position: absolute; bottom: 20px;">Logout</a>
     </nav>
   </div>
 
@@ -199,8 +200,9 @@
     </div>
     }
     @if (currentPage == 'products') {
-    <h3>Registered Products</h3>
-    <div style="height: fit-content; background-color: #ecf0f1">
+    
+    <div style="height: fit-content; background-color: white; padding: 20px; border-radius: 8px;">
+      <h3>Registered Products</h3>
       <table>
         <thead>
           <tr>
@@ -242,32 +244,33 @@
     </div>
     }
     @if (currentPage == 'hires') {
-
-    <h3>Hires Placed</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Phone Number</th>
-          <th>City</th>
-          <th>address</th>
-          <th>Delete User</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (hire of hires; track $index) {
-        <tr>
-          <td>{{ hire.name }}</td>
-          <td>{{ hire.email }}</td>
-          <td>{{ hire.phoneNumber }}</td>
-          <td>{{ hire.city }}</td>
-          <td>{{ hire.location }}</td>
-          <td><mat-icon (click)="deleteHires(hire)">delete</mat-icon></td>
-        </tr>
-        }
-      </tbody>
-    </table>
+    <div style="background-color: white; padding: 20px; border-radius: 8px;">
+      <h3>Hires Placed</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>City</th>
+            <th>address</th>
+            <th>Delete User</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (hire of hires; track $index) {
+          <tr>
+            <td>{{ hire.name }}</td>
+            <td>{{ hire.email }}</td>
+            <td>{{ hire.phoneNumber }}</td>
+            <td>{{ hire.city }}</td>
+            <td>{{ hire.location }}</td>
+            <td><mat-icon (click)="deleteHires(hire)">delete</mat-icon></td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
     }
   </div>
 </section>
